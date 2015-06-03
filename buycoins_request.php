@@ -1,0 +1,52 @@
+<?php
+
+
+include_once('./global.inc.php');
+include_once($configVars['ClassesBasePath'].'buycoins.class.php');
+$ObjBuycoins = new Buycoins();
+
+// Passkey that got from link 
+$TransactionId=$_GET['transactionid'];
+
+//echo'<pre>';print_r($name.' + '.$passkey); die;
+
+// Retrieve data from table where row that match this passkey 
+$BitcoinRow = $ObjBuycoins->GetBitCoinForPasskey($TransactionId);
+
+//echo'<pre>';print_r($BitcoinRow); die;
+
+// If successfully queried 
+if(!empty($BitcoinRow)){
+
+	$bitcoinRow = $BitcoinRow[0];
+
+	//echo'<pre>';print_r($bitcoinRow); die;
+
+    if($bitcoinRow["seller_aprovel"] == 1){
+    	echo'<pre>';print_r("Seller Already approved"); die;
+    } 
+
+	$add_date_time = strtotime($bitcoinRow["add_date"]);
+	$current_time = strtotime(date('Y-m-d H:i:s'));
+
+    $timeDiferenceInMinute = round(abs($current_time - $add_date_time) / 60,0);
+
+	//echo $timeDiferenceInMinute. " minute"; die;
+
+	if ($timeDiferenceInMinute <= 10) {
+		$ObjBuycoins->ApproveSellerForPasskey($TransactionId);
+		echo'<pre>';print_r("Seller approved"); die;
+	}else{
+		echo'<pre>';print_r("10 min time limit already crossed"); die;
+	}
+
+//$sql2 = "UPDATE items SET seller_aprovel' = ".$seller_aprovel.",id = LAST_INSERT_ID(id)WHERE id= ".$id.";SELECT LAST_INSERT_ID()";
+
+// if not found passkey, display message "Wrong Confirmation code" 
+}
+else {
+	echo "Wrong Passkey supplied";
+}
+
+// if successfully moved data from table"temp_members_db" to table "registered_members" displays message "Your account has been activated" and don't forget to delete confirmation code from table "temp_members_db
+?>

@@ -1,0 +1,109 @@
+.checkbox{
+	text-align: left;
+	padding:10px 0 20px;
+	position: relative;
+}
+
+input[type='checkbox']{
+  position:absolute;
+   z-index:-1000;
+    top:14px; 
+    left:24px;
+    overflow: hidden; 
+    clip: rect(0, 0, 0, 0,);
+    height:1px; 
+    width:1px; 
+    margin:-1px;
+     padding:0; 
+    border:0;
+    max-width: 100%;
+    opacity: 0;
+}
+
+input[type=checkbox] + label.css-label {
+	padding-left:28px;
+	height:20px; 
+	display:block;
+	line-height:20px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	vertical-align:middle;
+	font-size: 18px;
+	color:#45413e; 
+}
+
+input[type=checkbox]:checked + label.css-label {
+	background-position: 0 -19px;
+}
+.css-label a{
+	color:#4cae4e;
+}
+.css-label a:hover{
+	text-decoration: underline;
+}
+label.css-label {
+	background:url(../images/checkbox.png) left top no-repeat;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+
+
+.radio1 label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 25px;
+	margin-right: 15px;
+	font-size: 25px;
+}
+/*.radio1 input[type=radio]{
+    display: none;
+}*/
+.checkbox2 input[type=checkbox] {
+	display: none;
+}
+.radio1 label:before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	position: absolute;
+	left: 0;
+	bottom:1px;
+	background-color: #fff;
+	border:1px solid #cccccc;
+}
+
+.radio1 label:before {
+	border-radius: 50%;
+}
+.checkbox2 label {
+	margin-bottom: 10px;
+}
+.checkbox2 label:before {
+    border-radius: 3px;
+}
+
+.radio1 input[type=radio]:checked + label:before {
+    content: "\2022";
+    color: #4cae4e;
+    font-size: 30px;
+    text-align: center;
+    line-height: 15px;
+}
+
+.checkbox2 input[type=checkbox]:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 15px;
+	color: #f3f3f3;
+	text-align: center;
+    line-height: 15px;
+}
